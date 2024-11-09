@@ -1032,6 +1032,7 @@ spec:
         - name: storage-volume
           emptyDir: {}
 ---
+# kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode
 # Source: grafana/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount

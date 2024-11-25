@@ -53,6 +53,5 @@ jobs:
         with:
           manifests: |
             ./k8s/deployment.yaml
-            ./prometheus/deployment.yaml
           images: |
             amosrodrigues/fake-shop:v${{ github.run_number }}

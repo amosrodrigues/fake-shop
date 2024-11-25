@@ -7,4 +7,6 @@ COPY . /app
 RUN chmod +x /app/entrypoint.sh
 ENV PROMETHEUS_MULTIPROC_DIR=/tmp/metrics
 RUN mkdir -p /tmp/metrics 
+# Inicializar a instrumentação automática
+RUN opentelemetry-bootstrap -a install
 CMD ["/app/entrypoint.sh"]

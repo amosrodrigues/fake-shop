@@ -7,10 +7,6 @@ from models.base import db
 from flask_migrate import Migrate, upgrade
 import random
 from prometheus_flask_exporter.multiprocess import GunicornPrometheusMetrics
-# Importar a API de rastreamento
-from opentelemetry import trace
-# Adquirir um trace
-tracer = trace.get_tracer("order.tracer")
 
 app = Flask(__name__,
             static_url_path='',
@@ -127,10 +123,8 @@ def checkout():
 
 @app.route('/order_confirmation/<order_number>')
 def order_confirmation(order_number):
-    with tracer.start_as_current_span("confirmation") as span:
-        order = Order.query.filter_by(order_number=order_number).first()
-        span.set_attribute("order.city", order.city)
-        return render_template('order_confirmation.html', order=order)
+    order = Order.query.filter_by(order_number=order_number).first()
+    return render_template('order_confirmation.html', order=order)
 
 @app.route('/shop')
 def shop():

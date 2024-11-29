@@ -7,4 +7,5 @@ COPY . /app
 RUN chmod +x /app/entrypoint.sh
 ENV PROMETHEUS_MULTIPROC_DIR=/tmp/metrics
 RUN mkdir -p /tmp/metrics 
+RUN opentelemetry-bootstrap -a install
 CMD ["/app/entrypoint.sh"]
